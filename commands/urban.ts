@@ -3,8 +3,7 @@ import {
 	EmbedBuilder,
 	ButtonBuilder,
 	ButtonStyle,
-	ActionRowBuilder,
-	ChannelType
+	ActionRowBuilder
 } from "discord.js";
 import type { ChatInputCommandInteraction } from "discord.js";
 import type { CommandOptions } from "../types";
@@ -22,7 +21,7 @@ interface Result {
 	example: string;
 }
 
-export const description = "Replies with Pong!";
+export const description = "Gets a definition from Urban Dictionary";
 export const nsfw = true;
 export const options: CommandOptions[] = [
 	{
