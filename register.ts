@@ -5,6 +5,7 @@ import type { CommandOptions } from "./types";
 interface Command {
 	name: string;
 	description: string;
+	nsfw: boolean;
 	options: CommandOptions;
 }
 
@@ -18,6 +19,7 @@ export default async (token: string, runnableCommands: RunnableCommands) => {
 		commands.push({
 			name: commandName,
 			description: runnableCommands[commandName].description,
+			nsfw: runnableCommands[commandName].nsfw,
 			options: runnableCommands[commandName].options
 		});
 	}
