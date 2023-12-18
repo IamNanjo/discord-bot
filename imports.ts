@@ -1,10 +1,12 @@
 import { readdir } from "node:fs/promises";
 import type { Interaction } from "discord.js";
+import type { CommandOptions } from "./types";
 
 export interface RunnableCommands {
 	[command: string]: {
 		run: (intent: Interaction) => any;
 		description: string;
+		options: CommandOptions[];
 	};
 }
 
@@ -25,7 +27,8 @@ export const importCommands = async (): Promise<RunnableCommands> => {
 
 				runnableCommands[filenameWithoutExtension] = {
 					run: command.run,
-					description: command.description
+					description: command.description,
+					options: command.options
 				};
 
 				console.log(
