@@ -3,7 +3,8 @@ import {
 	EmbedBuilder,
 	ButtonBuilder,
 	ButtonStyle,
-	ActionRowBuilder
+	ActionRowBuilder,
+	ChannelType
 } from "discord.js";
 import type { ChatInputCommandInteraction } from "discord.js";
 import type { CommandOptions } from "../types";
@@ -22,13 +23,13 @@ interface Result {
 }
 
 export const description = "Replies with Pong!";
+export const nsfw = true;
 export const options: CommandOptions[] = [
 	{
 		name: "search",
 		description: "Search term",
 		type: 3,
-		required: false,
-		nsfw: true
+		required: false
 	}
 ];
 
@@ -72,8 +73,8 @@ export const run = async (interaction: ChatInputCommandInteraction) => {
 		.setDescription(
 			`**Definition:** ${definition.definition || "No definition"}
 			**Example:** ${definition.example || "No example"}
-			**Upvote:** ${definition.thumbs_up || "Unknown"}
-			**Downvote:** ${definition.thumbs_down || "Unknown"}
+			**Upvotes:** ${definition.thumbs_up || "Unknown"}
+			**Downvotes:** ${definition.thumbs_down || "Unknown"}
 			**Link:** [link to ${definition.word}](${
 				definition.permalink || "https://www.urbandictionary.com/"
 			})`
