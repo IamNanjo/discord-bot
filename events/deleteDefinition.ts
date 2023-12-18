@@ -1,7 +1,8 @@
-import type { ButtonInteraction } from "discord.js";
-
+import { type ButtonInteraction } from "discord.js";
 export default async (interaction: ButtonInteraction) => {
-	if (interaction.message.interaction?.user.id && interaction.user.id) return;
+	await interaction.client.channels.fetch(interaction.channelId);
 
-	interaction.message.delete();
+	if (interaction.message.interaction?.user.id !== interaction.user.id) return;
+
+	return interaction.message.delete();
 };
