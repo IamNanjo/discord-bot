@@ -11,7 +11,8 @@ export interface RunnableCommands {
 	[command: string]: {
 		run: (intent: ChatInputCommandInteraction) => any;
 		description: string;
-		options: CommandOptions[];
+		nsfw: boolean;
+		options: CommandOptions;
 	};
 }
 
@@ -42,6 +43,7 @@ export const importCommands = async (): Promise<RunnableCommands> => {
 				runnableCommands[filenameWithoutExtension] = {
 					run: command.run,
 					description: command.description,
+					nsfw: command.nsfw || false,
 					options: command.options
 				};
 
