@@ -1,0 +1,23 @@
+name: Deploy to Virtual Cloud Server
+
+on:
+  push:
+    branches:
+      - main
+      # - '*'
+
+jobs:
+  deploy:
+    env:
+      SERVER_USER: ${{ secrets.SERVER_USER }}
+      SERVER_ADDRESS: ${{ secrets.SERVER_ADDRESS }}
+      APP_PATH: ${{ secrets.APP_PATH }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Deploy
+        run: ssh $SERVER_USER@$SERVER_ADDRESS "cd $APP_PATH && git pull && ./deploy.sh"
+        env:
+          SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
