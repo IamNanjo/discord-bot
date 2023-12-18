@@ -1,29 +1,33 @@
-import { Client, GatewayIntentBits } from "discord.js";
+import { ButtonInteraction, Client, GatewayIntentBits } from "discord.js";
 
 import getToken from "./token";
 import registerCommands from "./register";
-import { importCommands } from "./imports";
+import { importCommands, importEvents } from "./imports";
 
 const token = getToken();
 const commands = await importCommands();
+const events = await importEvents();
 await registerCommands(token, commands);
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.on("ready", () => {
-	console.log(`\n${client.user?.displayName} is ready`);
+	console.log(`\n${client.user?.displayName} is ready\n`);
 });
 
-client.on("interactionCreate", async (interaction) => {
+client.on("interactionCreate", (interaction) => {
+	if ("customId" in interaction && interaction.customId in events) {
+		return events[interaction.customId](interaction);
+	}
+
 	if (
 		!interaction.isChatInputCommand() ||
 		!(interaction.commandName in commands)
 	) {
-		console.log(interaction);
 		return;
 	}
 
-	await commands[interaction.commandName].run(interaction);
+	commands[interaction.commandName].run(interaction);
 });
 
 client.login(token);
