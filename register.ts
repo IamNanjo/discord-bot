@@ -1,9 +1,11 @@
 import { REST, Routes } from "discord.js";
 import type { RunnableCommands } from "./imports";
+import type { CommandOptions } from "./types";
 
 interface Command {
 	name: string;
 	description: string;
+	options: CommandOptions;
 }
 
 export default async (token: string, runnableCommands: RunnableCommands) => {
@@ -15,7 +17,8 @@ export default async (token: string, runnableCommands: RunnableCommands) => {
 		const commandName = commandNames[i];
 		commands.push({
 			name: commandName,
-			description: runnableCommands[commandName].description
+			description: runnableCommands[commandName].description,
+			options: runnableCommands[commandName].options
 		});
 	}
 
