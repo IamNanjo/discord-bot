@@ -1,4 +1,5 @@
 {
+	"include": ["./*.ts", "commands/*.ts"],
 	"compilerOptions": {
 		"lib": ["ESNext"],
 		"module": "ESNext",
