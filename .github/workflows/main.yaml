@@ -32,8 +32,8 @@ jobs:
               required_contexts: []
             });
             console.log(response.data.id);
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy
         run: ssh $SERVER_USER@$SERVER_ADDRESS "cd $APP_PATH && git pull && ./deploy.sh"
@@ -51,5 +51,5 @@ jobs:
               deployment_id: ${{ steps.create_deployment.outputs.id }},
               state: 'success',
             });
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
