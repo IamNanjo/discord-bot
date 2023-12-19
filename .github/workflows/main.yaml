@@ -11,12 +11,20 @@ jobs:
     environment:
       name: Production
 
+    env:
+      SERVER_ADDRESS: ${{ secrets.SERVER_ADDRESS }}
+      SERVER_PORT: ${{ secrets.SERVER_PORT }}
+
     steps:
+      - name: SSH Setup
+        run: \
+          mkdir -p ~/.ssh/
+          ssh-keyscan -p $SERVER_PORT -t rsa $SERVER_ADDRESS >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
       - name: Deploy
         run: ssh -p $SERVER_PORT $SERVER_USER@$SERVER_ADDRESS "cd $APP_PATH && git pull && ./deploy.sh"
         env:
           SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
           SERVER_USER: ${{ secrets.SERVER_USER }}
-          SERVER_ADDRESS: ${{ secrets.SERVER_ADDRESS }}
-          SERVER_PORT: ${{ secrets.SERVER_PORT }}
           APP_PATH: ${{ secrets.APP_PATH }}
