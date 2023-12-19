@@ -2,6 +2,9 @@
   "name": "discord-bot",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "start": "pm2 flush pm2-process.json && pm2 restart pm2-process.json"
+  },
   "devDependencies": {
     "bun-types": "latest"
   },
