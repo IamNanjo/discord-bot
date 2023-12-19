@@ -8,6 +8,5 @@ export interface CommandOptions {
 	description: string;
 	type: CommandType;
 	required: boolean;
-	nsfw?: boolean;
 	choices?: { name: string; value: string | number }[];
 }
