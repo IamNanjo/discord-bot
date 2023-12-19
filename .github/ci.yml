@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - main
-      # - '*'
 
 jobs:
   deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: Production
     env:
       SERVER_USER: ${{ secrets.SERVER_USER }}
       SERVER_ADDRESS: ${{ secrets.SERVER_ADDRESS }}
@@ -17,7 +19,37 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Create Deployment
+        id: create_deployment
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const response = await github.repos.createDeployment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: process.env.GITHUB_SHA,
+              environment: 'Production',
+              required_contexts: []
+            });
+            console.log(response.data.id);
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Deploy
         run: ssh $SERVER_USER@$SERVER_ADDRESS "cd $APP_PATH && git pull && ./deploy.sh"
         env:
           SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
+
+      - name: Update Deployment Status
+        if: success()
+        uses: actions/github-script@v5
+        with:
+          script: |
+            await github.repos.createDeploymentStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              deployment_id: ${{ steps.create_deployment.outputs.id }},
+              state: 'success',
+            });
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
