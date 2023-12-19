@@ -12,7 +12,7 @@ export interface RunnableCommands {
 		run: (intent: ChatInputCommandInteraction) => any;
 		description: string;
 		nsfw: boolean;
-		options: CommandOptions;
+		options: CommandOptions[];
 	};
 }
 
@@ -25,6 +25,14 @@ export interface RunnableEvents {
 	) => any;
 }
 
+/**
+ * Gets all commands (.ts files) from ./commands/ and imports them
+ * @returns {object} Commands in an object (key is the name of command and value is an object with the keys run, description, nsfw and options)
+ * @property {function} run Function that executes the command
+ * @property {string} description Command description
+ * @property {boolean} nsfw Whether or not the command is only available in NSFW channels / DMs
+ * @property {object} options List of command arguments
+ */
 export const importCommands = async (): Promise<RunnableCommands> => {
 	const commandFiles = (await readdir("./commands")).filter((filename) =>
 		filename.endsWith(".ts")
@@ -72,6 +80,10 @@ export const importCommands = async (): Promise<RunnableCommands> => {
 	return runnableCommands;
 };
 
+/**
+ * Gets all events (.ts files) from ./events/ and imports them
+ * @returns List of events in an object (key is the name of event and value is a function)
+ */
 export const importEvents = async (): Promise<RunnableEvents> => {
 	const eventFiles = (await readdir("./events")).filter((filename) =>
 		filename.endsWith(".ts")
