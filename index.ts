@@ -16,18 +16,11 @@ client.on("ready", () => {
 });
 
 client.on("interactionCreate", (interaction) => {
-	if ("customId" in interaction && interaction.customId in events) {
+	if ("customId" in interaction && interaction.customId in events)
 		return events[interaction.customId](interaction);
-	}
 
-	if (
-		!interaction.isChatInputCommand() ||
-		!(interaction.commandName in commands)
-	) {
-		return;
-	}
-
-	commands[interaction.commandName].run(interaction);
+	if (interaction.isChatInputCommand() && interaction.commandName in commands)
+		return commands[interaction.commandName].run(interaction);
 });
 
 client.login(token);
