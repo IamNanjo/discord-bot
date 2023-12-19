@@ -10,3 +10,4 @@ For development I use [Bun](https://bun.sh/) for faster package installs, suppor
 
 ![Basic commands](screenshots/basic-commands.png)
 ![Message deletion](screenshots/message-deletion.png)
+![Reddit posts (r/softwaregore)](screenshots/reddit-softwaregore.png)
