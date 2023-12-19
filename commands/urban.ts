@@ -1,4 +1,4 @@
-import { ofetch } from "ofetch";
+import { $fetch } from "ofetch";
 import {
 	EmbedBuilder,
 	ButtonBuilder,
@@ -40,7 +40,7 @@ export const run = async (interaction: ChatInputCommandInteraction) => {
 		apiPath = `/v0/define?page=1&term=${search}`;
 	}
 
-	const res: { list: Result[] } = await ofetch(
+	const res: { list: Result[] } = await $fetch(
 		`https://api.urbandictionary.com${apiPath}`
 	).catch(() => null);
 
@@ -63,7 +63,7 @@ export const run = async (interaction: ChatInputCommandInteraction) => {
 	const definition = res.list[0];
 
 	const embed = new EmbedBuilder()
-		.setColor([0, 255, 0])
+		.setColor("#7289da")
 		.setAuthor({
 			name: `Urban dictionary | ${definition.word}`,
 			iconURL: udLogo
