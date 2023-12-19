@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-~/.bun/bin/bun upgrade
-~/.bun/bin/bun install
-~/.bun/bin/bun update
+source ~/.bashrc
 
-~/.bun/bin/bun run start
+bun upgrade
+bun install
+bun update
+
+bun run start
