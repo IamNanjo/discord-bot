@@ -19,6 +19,7 @@ jobs:
       - name: SSH Setup
         run: \
           mkdir -p ~/.ssh/
+          touch ~/.ssh/known_hosts
           ssh-keyscan -p $SERVER_PORT -t rsa $SERVER_ADDRESS >> ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
 
