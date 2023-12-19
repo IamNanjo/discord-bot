@@ -13,10 +13,11 @@ jobs:
     env:
       SERVER_USER: ${{ secrets.SERVER_USER }}
       SERVER_ADDRESS: ${{ secrets.SERVER_ADDRESS }}
+      SERVER_PORT: ${{ secrets.SERVER_PORT }}
       APP_PATH: ${{ secrets.APP_PATH }}
 
     steps:
       - name: Deploy
-        run: ssh $SERVER_USER@$SERVER_ADDRESS "cd $APP_PATH && git pull && ./deploy.sh"
+        run: ssh -p $SERVER_PORT $SERVER_USER@$SERVER_ADDRESS "cd $APP_PATH && git pull && ./deploy.sh"
         env:
           SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
