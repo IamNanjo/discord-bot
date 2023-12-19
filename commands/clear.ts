@@ -57,7 +57,7 @@ export const run = async (interaction: ChatInputCommandInteraction) => {
 	const messages = await interaction.channel.messages.fetch({ limit: count });
 	const messageCount = messages.size;
 
-	await interaction.channel.bulkDelete(messages);
+	if (messageCount) await interaction.channel.bulkDelete(messages);
 	await interaction.reply({
 		content: `${messageCount} messages deleted`,
 		ephemeral: true
