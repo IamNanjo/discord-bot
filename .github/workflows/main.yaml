@@ -13,6 +13,4 @@ jobs:
 
     steps:
       - name: Deploy
-        run: cd $APP_PATH && git pull && ./deploy.sh
-        env:
-          APP_PATH: ${{ secrets.APP_PATH }}
+        run: cd ~/discord-bot && git pull && ./deploy.sh
