@@ -1,4 +1,4 @@
-import { ButtonInteraction, Client, GatewayIntentBits } from "discord.js";
+import { Client, GatewayIntentBits } from "discord.js";
 
 import getToken from "./token";
 import registerCommands from "./register";
