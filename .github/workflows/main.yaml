@@ -18,10 +18,9 @@ jobs:
     steps:
       - name: SSH Setup
         run: |
-          chmod -R 700 ~/
           mkdir -p ~/.ssh/
           ssh-keyscan -p $SERVER_PORT -t rsa $SERVER_ADDRESS >> ~/.ssh/known_hosts
-          chmod -R 700 ~/.ssh
+          chmod 600 ~/.ssh/known_hosts
 
       - name: Deploy
         run: |
