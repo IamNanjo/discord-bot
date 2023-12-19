@@ -16,8 +16,17 @@ client.on("ready", () => {
 });
 
 client.on("interactionCreate", (interaction) => {
-	if ("customId" in interaction && interaction.customId in events)
-		return events[interaction.customId](interaction);
+	if ("customId" in interaction) {
+		const eventDetails = interaction.customId.split("_");
+		const eventName = eventDetails[0];
+		const eventArgs = eventDetails.slice(1);
+		const event = events.eventName;
+
+		if (eventName in events)
+			return eventArgs.length
+				? event(interaction, eventArgs)
+				: event(interaction);
+	}
 
 	if (interaction.isChatInputCommand() && interaction.commandName in commands)
 		return commands[interaction.commandName].run(interaction);

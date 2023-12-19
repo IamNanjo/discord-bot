@@ -21,7 +21,8 @@ export interface RunnableEvents {
 		intent:
 			| AnySelectMenuInteraction
 			| ButtonInteraction
-			| ModalSubmitInteraction
+			| ModalSubmitInteraction,
+		args?: string[]
 	) => any;
 }
 
