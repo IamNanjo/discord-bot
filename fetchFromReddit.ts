@@ -8,6 +8,7 @@ interface Author {
 }
 
 interface ParsedPost {
+	id: string;
 	title: string;
 	author: Author;
 	url: string;
@@ -17,15 +18,15 @@ interface ParsedPost {
 
 export default async (
 	subreddit: string,
-	count: number
+	count: number,
+	after: string
 ): Promise<ParsedPost[]> => {
-	const page = 1;
-
-	const response: RedditAPIResponse = await $fetch(
-		`https://reddit.com/r/${subreddit}.json?after=${page}`
-	);
+	const response: RedditAPIResponse | null = await $fetch(
+		`https://reddit.com/r/${subreddit}.json?after=${after}&limit=${count}`
+	).catch(() => null);
 
 	if (
+		!response ||
 		!response.kind ||
 		response.kind !== "Listing" ||
 		!response.data ||
@@ -38,8 +39,8 @@ export default async (
 
 	const parsedPosts: ParsedPost[] = [];
 
-	const iMax = posts.length > count ? count : posts.length;
-	for (let i = 0; i < iMax; i++) {
+	// If you get more posts than the limit, that means the first posts are rules etc. for the subreddit and they can be ignored
+	for (let i = posts.length - count, len = posts.length; i < len; i++) {
 		const { data: post } = posts[i];
 		const authorURL = `https://reddit.com/user/${post.author}/about.json`;
 		const { data: author }: RedditUserResponse = await $fetch(authorURL);
@@ -49,6 +50,7 @@ export default async (
 		if (author.snoovatar_img) authorField.iconURL = author.snoovatar_img;
 
 		parsedPosts.push({
+			id: post.name,
 			author: authorField,
 			title: post.title,
 			text: post.selftext,
