@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./bot.db"
+}
+
+model Chat {
+  id     String   @id
+  reddit Reddit[]
+}
+
+model Reddit {
+  id        Int    @id @default(autoincrement())
+  chatId    String
+  subreddit String
+  after     String @default("1")
+  chat      Chat   @relation(fields: [chatId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
