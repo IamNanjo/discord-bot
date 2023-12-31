@@ -8,8 +8,6 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
-    environment:
-      name: Production
 
     steps:
       - name: Deploy
