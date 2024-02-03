@@ -1,22 +1,22 @@
 {
-	"name": "discord-bot",
-	"module": "index.ts",
-	"type": "module",
-	"scripts": {
-		"start": "pm2 flush pm2-process.json && pm2 restart pm2-process.json",
-		"dbmigrate": "bun prisma migrate dev --name",
-		"dbgenerate": "bun prisma generate"
-	},
-	"devDependencies": {
-		"bun-types": "latest",
-		"prisma": "^5.7.1"
-	},
-	"peerDependencies": {
-		"typescript": "^5.0.0"
-	},
-	"dependencies": {
-		"@prisma/client": "5.7.1",
-		"discord.js": "^14.14.1",
-		"ofetch": "^1.3.3"
-	}
+  "name": "discord-bot",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "pm2 flush pm2-process.json && pm2 restart pm2-process.json",
+    "dbmigrate": "bun prisma migrate dev --name",
+    "dbgenerate": "bun prisma generate"
+  },
+  "devDependencies": {
+    "bun-types": "latest",
+    "prisma": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@prisma/client": "latest",
+    "discord.js": "^14.14.1",
+    "ofetch": "^1.3.3"
+  }
 }
