@@ -20,6 +20,8 @@ therefore it was removed from the bot's commands.
 
 This also removed the need for a database, so that has been removed as well.
 
+Latest commit with Reddit command: [7b9bd81294b14b7206a7b49f99fa02842b7a8542](https://github.com/IamNanjo/discord-bot/tree/7b9bd81294b14b7206a7b49f99fa02842b7a8542)
+
 ## Screenshots
 
 ![Basic commands](screenshots/basic-commands.png)
