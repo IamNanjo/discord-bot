@@ -3,38 +3,38 @@ import type { RunnableCommands } from "./imports";
 import type { CommandOptions } from "./types";
 
 interface Command {
-	name: string;
-	description: string;
-	nsfw: boolean;
-	options: CommandOptions[];
+  name: string;
+  description: string;
+  nsfw: boolean;
+  options: CommandOptions[];
 }
 
 export default async (token: string, runnableCommands: RunnableCommands) => {
-	const commandNames = Object.keys(runnableCommands);
+  const commandNames = Object.keys(runnableCommands);
 
-	let commands: Command[] = [];
+  let commands: Command[] = [];
 
-	for (let i = 0, len = commandNames.length; i < len; i++) {
-		const commandName = commandNames[i];
-		commands.push({
-			name: commandName,
-			description: runnableCommands[commandName].description,
-			nsfw: runnableCommands[commandName].nsfw,
-			options: runnableCommands[commandName].options
-		});
-	}
+  for (let i = 0, len = commandNames.length; i < len; i++) {
+    const commandName = commandNames[i];
+    commands.push({
+      name: commandName,
+      description: runnableCommands[commandName].description,
+      nsfw: runnableCommands[commandName].nsfw,
+      options: runnableCommands[commandName].options,
+    });
+  }
 
-	const rest = new REST({ version: "10" }).setToken(token);
+  const rest = new REST({ version: "10" }).setToken(token);
 
-	const appId = ((await rest.get(Routes.currentApplication())) as any).id;
+  const appId = ((await rest.get(Routes.currentApplication())) as any).id;
 
-	await rest
-		.put(Routes.applicationCommands(appId), { body: commands })
-		.then(() => {
-			console.log(
-				"\x1b[32mSuccesfully reloaded application slash commands\x1b[0m"
-			);
-		})
-		.catch((err) => console.error(`\x1b[31m${err}\x1b[0m`))
-		.finally(console.log);
+  await rest
+    .put(Routes.applicationCommands(appId), { body: commands })
+    .then(() => {
+      console.log(
+        "\x1b[32mSuccesfully reloaded application slash commands\x1b[0m"
+      );
+    })
+    .catch((err) => console.error(`\x1b[31m${err}\x1b[0m`))
+    .finally(console.log);
 };
