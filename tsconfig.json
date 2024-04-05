@@ -1,18 +1,18 @@
 {
-	"include": ["./*.ts", "commands/*.ts"],
-	"compilerOptions": {
-		"lib": ["ESNext"],
-		"module": "ESNext",
-		"target": "ESNext",
-		"moduleResolution": "Bundler",
-		"moduleDetection": "force",
-		"noEmit": true,
-		"composite": true,
-		"strict": true,
-		"skipLibCheck": true,
-		"forceConsistentCasingInFileNames": true,
-		"types": [
-			"bun-types" // add Bun global
-		]
-	}
+  "include": ["./*.ts", "commands/*.ts"],
+  "compilerOptions": {
+    "lib": ["ESNext"],
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "Bundler",
+    "moduleDetection": "force",
+    "noEmit": true,
+    "composite": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": [
+      "bun-types" // add Bun global
+    ]
+  }
 }
