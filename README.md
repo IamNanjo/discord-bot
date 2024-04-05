@@ -24,4 +24,3 @@ This also removed the need for a database, so that has been removed as well.
 
 ![Basic commands](screenshots/basic-commands.png)
 ![Message deletion](screenshots/message-deletion.png)
-![Reddit posts (r/softwaregore)](screenshots/reddit-softwaregore.png)
