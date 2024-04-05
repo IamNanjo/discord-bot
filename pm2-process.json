@@ -1,6 +1,11 @@
 {
 	"name": "discord-bot",
 	"script": "index.ts",
+	"args": "--register",
 	"interpreter": "bun",
-	"watch": ["./*.ts", "./commands/*.ts", "./events/*.ts"]
+	"watch": [
+		"./*.ts",
+		"./commands/*.ts",
+		"./events/*.ts"
+	]
 }
