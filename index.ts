@@ -2,7 +2,6 @@ import { Client, GatewayIntentBits } from "discord.js";
 
 import getToken from "./token";
 import registerCommands from "./register";
-import db from "./db";
 import { importCommands, importEvents } from "./imports";
 
 const token = getToken();
@@ -15,18 +14,6 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.on("ready", () => {
   console.log(`${client.user?.displayName} is ready\n`);
-});
-
-// Add and remove guilds from db on join and leave
-client.on("guildCreate", async (guild) => {
-  await db.chat.upsert({
-    where: { id: guild.id },
-    create: { id: guild.id },
-    update: {},
-  });
-});
-client.on("guildDelete", async (guild) => {
-  await db.chat.delete({ where: { id: guild.id } });
 });
 
 client.on("interactionCreate", (interaction) => {
