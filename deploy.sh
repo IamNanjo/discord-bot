@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
-builtin source ~/.bashrc
+builtin source ~/.env
 
-mise x bun -- bun upgrade
-mise x bun -- bun install
-mise x bun -- bun update
-
-mise x bun -- bun run start
+~/.local/bin/mise x bun -- bun install
+~/.local/bin/mise x bun -- bun run start
