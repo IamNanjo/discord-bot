@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
-PATH="$HOME/.local/bin"
+~/.local/bin/mise x bun -- bun upgrade
+~/.local/bin/mise x bun -- bun install
+~/.local/bin/mise x bun -- bun update
 
-bun upgrade
-bun install
-bun update
-
-bun run start
+~/.local/bin/mise x bun -- bun run start
