@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-alias bun="$HOME/.local/bin/mise x bun -- bun"
+PATH="$HOME/.local/bin"
 
 bun upgrade
 bun install
