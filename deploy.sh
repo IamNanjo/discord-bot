@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-~/.local/bin/mise x bun -- bun upgrade
-~/.local/bin/mise x bun -- bun install
-~/.local/bin/mise x bun -- bun update
+builtin source ~/.bashrc
 
-~/.local/bin/mise x bun -- bun run start
+mise x bun -- bun upgrade
+mise x bun -- bun install
+mise x bun -- bun update
+
+mise x bun -- bun run start
